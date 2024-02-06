@@ -13,7 +13,6 @@ namespace DataStructures
 
 class ArrayClass
 {
-    // ehh
     public static void Arrays()
     {
         long[] perStudentPetCount = [0, 1, 2, 0, 1, 2, 0, 2, 8];
