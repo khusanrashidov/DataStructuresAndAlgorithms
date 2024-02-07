@@ -10,7 +10,6 @@ namespace DataStructures
             //ArrayClass.Arrays();
             //ArrayClass.MultiDimensionalArrays();
             ArrayClass.JaggedArrays();
-            Console.WriteLine();
         }
     }
 }
@@ -73,7 +72,7 @@ class ArrayClass
         jagged[1] = new long[8]; // Since we do not explicitly assign a value for the each item in the array, implicitly they are initialized to zero.
 
         // set row 2
-        jagged[2] = new long[4] { 20, 40, 50, 80 }; // array initializer
+        jagged[2] = new long[4] { 20, 40, 50, 80 }; // array collection initializer can be simplified
 
         Console.WriteLine("At row 2, column 0: " + jagged[2][0]);
 
