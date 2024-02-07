@@ -6,9 +6,11 @@ namespace DataStructures
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            //Console.WriteLine("Hello, World!");
             //ArrayClass.Arrays();
-            ArrayClass.MultiDimensionalArrays();
+            //ArrayClass.MultiDimensionalArrays();
+            ArrayClass.JaggedArrays();
+            Console.WriteLine();
         }
     }
 }
@@ -56,6 +58,30 @@ class ArrayClass
             Console.Write(element + ' ');
             //foreach (var item in element)
             //    Console.WriteLine(item);
+        }
+    }
+    public static void JaggedArrays()
+    {
+        long[][] jagged = new long[3][];
+
+        // set row 0
+        jagged[0] = new long[2];
+        jagged[0][0] = 8;
+        jagged[0][1] = 10;
+
+        // set row 1
+        jagged[1] = new long[8]; // Since we do not explicitly assign a value for the each item in the array, implicitly they are initialized to zero.
+
+        // set row 2
+        jagged[2] = new long[4] { 20, 40, 50, 80 }; // array initializer
+
+        Console.WriteLine("At row 2, column 0: " + jagged[2][0]);
+
+        foreach (var element in jagged)
+        {
+            Console.WriteLine();
+            foreach (var item in element)
+                Console.Write(item + " "); // not + ' '
         }
     }
 }
