@@ -1,5 +1,6 @@
 ﻿using System;
-using System.ComponentModel;
+using System.Collections.Generic;
+
 namespace DataStructures
 {
     internal class Program
@@ -9,7 +10,9 @@ namespace DataStructures
             //Console.WriteLine("Hello, World!");
             //ArrayClass.Arrays();
             //ArrayClass.MultiDimensionalArrays();
-            ArrayClass.JaggedArrays();
+            //ArrayClass.JaggedArrays();
+            //LinkedListClass.LinkedLists();
+            LinkedListClass.TravelBucketListUsingBuiltInLinkedList();
         }
     }
 }
@@ -82,5 +85,99 @@ class ArrayClass
             foreach (var item in element)
                 Console.Write(item + " "); // not + ' '
         }
+    }
+}
+
+class LinkedListClass
+{
+    public static void LinkedLists()
+    {
+        LinkedListFromScratch myLinkedList = new LinkedListFromScratch();
+        myLinkedList.Add(8); // current head is 8
+        myLinkedList.Add(1); // now head is 1
+        Console.WriteLine(myLinkedList.head.data);
+        Console.WriteLine(myLinkedList.head.next.data);
+    }
+
+    static public void TravelBucketListUsingBuiltInLinkedList()
+    {
+        // creating linked list
+        LinkedList<string> travelBucketList = new LinkedList<string>();
+
+        // adding items
+        travelBucketList.AddFirst("Osaka, Japan.");
+        travelBucketList.AddFirst("Canberra, Australia.");
+        travelBucketList.AddAfter(travelBucketList.First, "Paris, France.");
+        travelBucketList.AddLast("Tokyo, Japan.");
+        travelBucketList.AddBefore(travelBucketList.Last, "Roma, Italy.");
+        foreach (var item in travelBucketList)
+        {
+            Console.WriteLine(item);
+        }
+
+        // We cannot apply indexing with [] to an expression of type 'LinkedList', however we can apply indexing with [] to type 'Array'.
+        // We can only access items in the linked list by traversing from the front or rear of the linked list. Finding the first or last node is the most efficient way of accessing it. If we would access or search items using node index, then it would be inefficient. However, when we use Find or FindLast, we still traverse through the entire list from front or rear to retrieve specific item, which is also inefficient.
+
+        // accessing items
+        Console.WriteLine(travelBucketList.Find("Paris, France.")); // finds the first node that contains specified value
+        Console.WriteLine(travelBucketList.FindLast("Roma, Italy.")); // finds the last node that contains specified value
+        Console.WriteLine(travelBucketList.Find("Paris, France.").Value);
+        Console.WriteLine(travelBucketList.FindLast("Roma, Italy.").ValueRef);
+        Console.WriteLine(travelBucketList.Find("Paris, France.").Next);
+        Console.WriteLine(travelBucketList.FindLast("Roma, Italy.").Previous.Value);
+        Console.WriteLine(travelBucketList.Find("Osaka, Japan.").Next.Previous.Value);
+        Console.WriteLine(travelBucketList.Find("Canberra, Australia.").Previous);
+        Console.WriteLine(travelBucketList.Find("Kyoto, Japan."));
+        //Console.WriteLine(travelBucketList.Find("Tokyo, Japan.").Next.Value); // will return null as last item points to the next item that is null
+        
+        // Searching to see our list contains the specified item is computationally expensive as we have to traverse thoroughly through the entire linked list.
+        Console.WriteLine(travelBucketList.Contains("Osaka, Japan."));
+        Console.WriteLine(travelBucketList.Contains("Kyoto, Japan."));
+        Console.WriteLine(travelBucketList.Contains("Tokyo, Japan."));
+
+        // removing items
+        travelBucketList.RemoveFirst();
+        travelBucketList.RemoveLast();
+
+        // Removes the first occurrence of the specified item in the linked list and returns true if deleted; otherwise, it returns false.
+        Console.WriteLine(travelBucketList.Remove("Kyoto, Japan."));
+        Console.WriteLine(travelBucketList.Remove("Osaka, Japan."));
+
+        travelBucketList.Clear(); // Removes all nodes of type 'LinkedListNode' from linked list type 'LinkedList'.
+
+        // It should be noted that in a C# linked list, we can only find and remove items by object, not by index.
+    }
+
+    // classes are blueprints
+
+    // Linked List
+    class LinkedListFromScratch
+    {
+        public Node head;
+
+        // methods are functions
+        public void Add(long data)
+        {
+            if (this.head == null) // case when LL is empty
+            {
+                this.head = new Node(data);
+            }
+            else // case when LL is not empty
+            {
+                Node nodeToAdd = new Node(data); // newNode
+                nodeToAdd.next = this.head; // newNode => currentHead
+                this.head = nodeToAdd; // newHead => previousHead
+            }
+        }
+    }
+
+    // Instead of creating a linked list from scratch, we can use the LinkedList<T> C# class type.
+
+    // Node
+    class Node
+    {
+        public long data;
+        public Node next;
+        public Node(long data) => this.data = data;
     }
 }
