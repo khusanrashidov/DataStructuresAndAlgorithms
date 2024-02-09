@@ -15,7 +15,9 @@ namespace DataStructures
             //ArrayClass.JaggedArrays();
             //LinkedListClass.LinkedLists();
             //LinkedListClass.TravelBucketListUsingBuiltInLinkedList();
-            StackClass.Stacks();
+            //StackClass.Stacks();
+            //StackClass.BuiltInStack();
+            QueueClass.Queues();
         }
     }
 }
@@ -232,7 +234,7 @@ class StackClass
         stack.Push(item: "Spade: Jack");
         stack.Push(item: "Diamond : Joker");
         stack.Push(item: "Club : King");
-        
+
         Console.WriteLine(stack!.Peek()!);
         Console.WriteLine(stack.Peek()!);
 
@@ -240,5 +242,73 @@ class StackClass
         Console.WriteLine(firstItemPopped);
         Console.WriteLine(stack!.Pop());
         Console.WriteLine(stack.Peek()!);
+        stack.Push("Diamond: 8");
+        Console.WriteLine(stack.Peek());
+    }
+
+    public static void BuiltInStack()
+    {
+        Stack stack = new Stack(); // non-generic LIFO
+        Stack<double> stacks = new Stack<double>(); // generic FILO
+        stack.Push(obj: "hi");
+        stack.Push(obj: "hello");
+        stack.Push(obj: "howdy");
+        Console.WriteLine(stack.Peek());
+        Console.WriteLine(stack.Pop());
+        Console.WriteLine(stack.Peek());
+        stack.Clear();
+        stack.Pop(); // We can show the call stack after an exception is thrown. So, it should be noted that when we get an error, we can see the call stack, which is in fact implemented as a stack data structure.
+    }
+}
+
+class QueueClass
+{
+    ArrayList queueArray = new ArrayList();
+
+    // enqueue method function
+    public void Enqueue(object item)
+    {
+        queueArray.Add(item);
+    }
+
+    // dequeue method function
+    public object? Dequeue()
+    {
+        if (queueArray[0] is not null) // pattern matching
+        {
+            var firstItem = queueArray[0];
+            queueArray.RemoveAt(0);
+            return firstItem;
+        }
+        return null;
+    }
+
+    // peek method function
+    public object? Peek()
+    {
+        if (!(queueArray[0] is null))
+        {
+            var firstItem = queueArray[0];
+            return firstItem;
+        }
+        return null;
+    }
+
+    public static void Queues()
+    {
+        QueueClass queue = new QueueClass();
+        queue.Enqueue(item: "hi");
+        queue.Enqueue(item: "hello");
+        queue.Enqueue(item: "howdy");
+        Console.WriteLine(queue.Peek()!);
+        Console.WriteLine(queue!.Peek());
+        Console.WriteLine(queue.Dequeue());
+        Console.WriteLine(queue.Peek());
+        queue.Dequeue();
+        Console.WriteLine(queue!.Peek()!);
+        queue!.Enqueue("salom");
+        Console.WriteLine(queue.Peek());
+        queue!.Dequeue();
+        Console.WriteLine(queue.Peek()!);
     }
 }
