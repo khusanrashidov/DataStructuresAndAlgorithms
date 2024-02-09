@@ -15,6 +15,7 @@ namespace DataStructures
             //ArrayClass.JaggedArrays();
             //LinkedListClass.LinkedLists();
             //LinkedListClass.TravelBucketListUsingBuiltInLinkedList();
+            StackClass.Stacks();
         }
     }
 }
@@ -222,5 +223,22 @@ class StackClass
             return (string?)lastItem;
         }
         return null;
+    }
+
+    public static void Stacks()
+    {
+        StackClass stack = new StackClass();
+        stack.Push(item: "Heart : Queen");
+        stack.Push(item: "Spade: Jack");
+        stack.Push(item: "Diamond : Joker");
+        stack.Push(item: "Club : King");
+        
+        Console.WriteLine(stack!.Peek()!);
+        Console.WriteLine(stack.Peek()!);
+
+        var firstItemPopped = stack.Pop()!;
+        Console.WriteLine(firstItemPopped);
+        Console.WriteLine(stack!.Pop());
+        Console.WriteLine(stack.Peek()!);
     }
 }
