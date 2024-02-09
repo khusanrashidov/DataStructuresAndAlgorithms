@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DataStructures
 {
@@ -12,7 +14,7 @@ namespace DataStructures
             //ArrayClass.MultiDimensionalArrays();
             //ArrayClass.JaggedArrays();
             //LinkedListClass.LinkedLists();
-            LinkedListClass.TravelBucketListUsingBuiltInLinkedList();
+            //LinkedListClass.TravelBucketListUsingBuiltInLinkedList();
         }
     }
 }
@@ -129,7 +131,7 @@ class LinkedListClass
         Console.WriteLine(travelBucketList.Find("Canberra, Australia.").Previous);
         Console.WriteLine(travelBucketList.Find("Kyoto, Japan."));
         //Console.WriteLine(travelBucketList.Find("Tokyo, Japan.").Next.Value); // will return null as last item points to the next item that is null
-        
+
         // Searching to see our list contains the specified item is computationally expensive as we have to traverse thoroughly through the entire linked list.
         Console.WriteLine(travelBucketList.Contains("Osaka, Japan."));
         Console.WriteLine(travelBucketList.Contains("Kyoto, Japan."));
@@ -179,5 +181,46 @@ class LinkedListClass
         public long data;
         public Node next;
         public Node(long data) => this.data = data;
+    }
+}
+
+class StackClass
+{
+    // In C#, the ArrayList is a non-generic collection of objects whose size increases dynamically.
+    // It is the same as Array except that its size increases dynamically.
+    // An ArrayList can be used to add unknown data where you don't know the types and the size of the data.
+
+    Array array = Array.CreateInstance(typeof(object), sizeof(double)); // Array.BinarySearch(array, 8) // static
+
+    ArrayList arrayList = new ArrayList(); // arrayList.BinarySearch(8); // non-static
+
+    // push function method
+    public void Push(string item)
+    {
+        this.arrayList.Add(item); // A name can be simplified by removing an unnecessary 'this' keyword followed by a dot.
+    }
+
+    // pop function method
+    public string? Pop()
+    {
+        if (this.arrayList.ToArray().Last() != null)
+        {
+            var lastItem = this.arrayList[^1];
+            this.arrayList.RemoveAt(arrayList.ToArray().Length - 1);
+            return (string?)lastItem;
+        }
+        return null;
+    }
+
+    // peek function method
+    public string? Peek()
+    {
+        if (this.arrayList[^1] != null)
+        {
+            var lastItem = this.arrayList[^1];
+            //this.arrayList.RemoveAt(arrayList.Count - 1);
+            return (string?)lastItem;
+        }
+        return null;
     }
 }
