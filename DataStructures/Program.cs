@@ -257,7 +257,7 @@ class StackClass
         Console.WriteLine(stack.Pop());
         Console.WriteLine(stack.Peek());
         stack.Clear();
-        stack.Pop(); // We can show the call stack after an exception is thrown. So, it should be noted that when we get an error, we can see the call stack, which is in fact implemented as a stack data structure.
+        stack.Pop(); // We can show the call stack after an exception is thrown. So, it should be noted that when we get an error, we can see the call stack, and the stack trace is in fact implemented as a stack data structure.
     }
 }
 
