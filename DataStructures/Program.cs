@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,7 +19,8 @@ namespace DataStructures
             //StackClass.Stacks();
             //StackClass.BuiltInStack();
             //QueueClass.Queues();
-            HashClass.Dictionaries();
+            //HashClass.Dictionaries();
+            SetClass.HashSets();
         }
     }
 }
@@ -339,5 +341,56 @@ class HashClass
         {
             Console.WriteLine(item);
         }
+
+        // There is also a notion of FrozenDictionary. Frozen sets, dictionaries, collections provide an immutable, read-only set that is excellently optimized for fast lookup and enumeration. In frozen dictionaries we cannot add or remove items to the collection.
+        FrozenDictionary<int, int> frozenDictionary = Enumerable.Range(0, 8).ToFrozenDictionary(key => key);
     }
+}
+
+class SetClass
+{
+    // A set is a collection that contains no duplicate elements.
+    // There are many types of sets in C# under the System.Collections.Generic namespace.
+    // HashSet: A HashSet does not store the elements in order while giving faster operation time.
+    HashSet<long> hashSet = new HashSet<long>();
+    // SortedSet: A SortedSet stores the elements in order which allows more functionality.
+    SortedSet<double> sortedSet = new SortedSet<double>();
+    // FrozentSet: A FrozenSet as a FrozenDictionary provides an immutable, read-only dictionaryand set, optimized for fast lookup and enumeration.
+    FrozenSet<int> frozenSet = Enumerable.Range(0, 8).ToFrozenSet();
+
+    // The HashSet<T> class provides high-performance set operations. A set is a collection that contains no duplicate elements, and whose elements are in no particular order.
+    public static void HashSets()
+    {
+        HashSet<string> primaryColors = new HashSet<string>() { "red", "blue", "yellow" };
+        Console.WriteLine(primaryColors.Add("red")); // Add function returns true if the element is added to the HashSet<T> object; false if the element is already present.
+        Console.WriteLine(primaryColors.Add("green"));
+        primaryColors.Add("purple");
+        primaryColors.Remove("green");
+        Console.WriteLine(primaryColors.Remove("purple"));
+        Console.WriteLine(primaryColors.Remove("green"));
+
+        string color = "green";
+
+        if (primaryColors.Contains(color.ToLower()))
+            Console.WriteLine(color + " is a primary color");
+        else
+            Console.WriteLine(color + " is a not primary color");
+
+        var frozenCollection = primaryColors.ToFrozenSet(); // Now the hash set that was infinite and mutable became a finite and immutable set frozenCollection in which we cannot add and remove items anymore. Meaning we cannot use the Add() function and the Remove() method.
+
+        // We can add elements to collections as long as the collections are not frozen sets or frozen dictionaries.
+
+        Console.WriteLine();
+
+        foreach (var element in primaryColors)
+            Console.WriteLine(element);
+
+        Console.WriteLine();
+
+        foreach (var item in frozenCollection)
+        {
+            Console.WriteLine(item);
+        }
+    }
+    // we cannot print void
 }
