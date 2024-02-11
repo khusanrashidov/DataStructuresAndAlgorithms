@@ -17,7 +17,8 @@ namespace DataStructures
             //LinkedListClass.TravelBucketListUsingBuiltInLinkedList();
             //StackClass.Stacks();
             //StackClass.BuiltInStack();
-            QueueClass.Queues();
+            //QueueClass.Queues();
+            HashClass.Dictionaries();
         }
     }
 }
@@ -310,5 +311,33 @@ class QueueClass
         Console.WriteLine(queue.Peek());
         queue!.Dequeue();
         Console.WriteLine(queue.Peek()!);
+    }
+}
+
+class HashClass
+{
+    public static void Dictionaries()
+    {
+        // key => state
+        // value => capital
+        Dictionary<object, string> statesToCapitals = new Dictionary<object, string>() { }; // Dictionary<TKey, TValue> where TKey:notnull.
+        statesToCapitals.Add("Texas", "Austin");
+        statesToCapitals.Add("New York", "Albany");
+        //statesToCapitals.Add("New York", "Albany"); // We cannot add an item with the same key that has already been added. But we might have duplicate keys.
+
+        // We can look for values using keys. If we seek out keys that don't exist, we get System.Collections.Generic.KeyNotFoundException.
+        // If we search using values instead of keys, we could potentially get System.Collections.Generic.KeyNotFoundException in case that value doesn't happen to be a key of the particular value.
+
+        // We can access values using the indexer in dictionaries. The indexer always takes the key as a parameter.
+        Console.WriteLine(statesToCapitals["New York"]);
+
+        statesToCapitals.Remove("New York");
+        statesToCapitals.Add("Kansas", "Topeka");
+        statesToCapitals.Add("Nevada", "Carson City");
+
+        foreach (KeyValuePair<object, string> item in statesToCapitals)
+        {
+            Console.WriteLine(item);
+        }
     }
 }
