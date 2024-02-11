@@ -10,16 +10,16 @@ namespace DataStructures
     {
         static void Main(string[] args)
         {
-            //Console.WriteLine("Hello, World!");
-            //ArrayClass.Arrays();
-            //ArrayClass.MultiDimensionalArrays();
-            //ArrayClass.JaggedArrays();
-            //LinkedListClass.LinkedLists();
-            //LinkedListClass.TravelBucketListUsingBuiltInLinkedList();
-            //StackClass.Stacks();
-            //StackClass.BuiltInStack();
-            //QueueClass.Queues();
-            //HashClass.Dictionaries();
+            Console.WriteLine("Hello, World!");
+            ArrayClass.Arrays();
+            ArrayClass.MultiDimensionalArrays();
+            ArrayClass.JaggedArrays();
+            LinkedListClass.LinkedLists();
+            LinkedListClass.TravelBucketListUsingBuiltInLinkedList();
+            StackClass.Stacks();
+            StackClass.BuiltInStack();
+            QueueClass.Queues();
+            HashClass.Dictionaries();
             SetClass.HashSets();
         }
     }
