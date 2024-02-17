@@ -161,7 +161,7 @@ class LinkedListClass
     // Linked List
     class LinkedListFromScratch
     {
-        public Node head;
+        public Node? head;
 
         // methods are functions
         public void Add(long data)
@@ -185,7 +185,7 @@ class LinkedListClass
     class Node
     {
         public long data;
-        public Node next;
+        public Node? next;
         public Node(long data) => this.data = data;
     }
 }
