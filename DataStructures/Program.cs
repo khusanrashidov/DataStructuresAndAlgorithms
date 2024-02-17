@@ -103,8 +103,8 @@ class LinkedListClass
         LinkedListFromScratch myLinkedList = new LinkedListFromScratch();
         myLinkedList.Add(8); // current head is 8
         myLinkedList.Add(1); // now head is 1
-        Console.WriteLine(myLinkedList.head.data);
-        Console.WriteLine(myLinkedList.head.next.data);
+        Console.WriteLine(myLinkedList?.head?.data);
+        Console.WriteLine(myLinkedList?.head?.next?.data);
     }
 
     static public void TravelBucketListUsingBuiltInLinkedList()
@@ -113,12 +113,12 @@ class LinkedListClass
         LinkedList<string> travelBucketList = new LinkedList<string>();
 
         // adding items
-        travelBucketList.AddFirst("Osaka, Japan.");
-        travelBucketList.AddFirst("Canberra, Australia.");
-        travelBucketList.AddAfter(travelBucketList.First, "Paris, France.");
-        travelBucketList.AddLast("Tokyo, Japan.");
-        travelBucketList.AddBefore(travelBucketList.Last, "Roma, Italy.");
-        foreach (var item in travelBucketList)
+        travelBucketList?.AddFirst("Osaka, Japan.");
+        travelBucketList?.AddFirst("Canberra, Australia.");
+        travelBucketList?.AddAfter(travelBucketList?.First!, "Paris, France.");
+        travelBucketList?.AddLast("Tokyo, Japan.");
+        travelBucketList?.AddBefore(travelBucketList?.Last!, "Roma, Italy.");
+        foreach (var item in travelBucketList!)
         {
             Console.WriteLine(item);
         }
@@ -129,29 +129,29 @@ class LinkedListClass
         // accessing items
         Console.WriteLine(travelBucketList.Find("Paris, France.")); // finds the first node that contains specified value
         Console.WriteLine(travelBucketList.FindLast("Roma, Italy.")); // finds the last node that contains specified value
-        Console.WriteLine(travelBucketList.Find("Paris, France.").Value);
-        Console.WriteLine(travelBucketList.FindLast("Roma, Italy.").ValueRef);
-        Console.WriteLine(travelBucketList.Find("Paris, France.").Next);
-        Console.WriteLine(travelBucketList.FindLast("Roma, Italy.").Previous.Value);
-        Console.WriteLine(travelBucketList.Find("Osaka, Japan.").Next.Previous.Value);
-        Console.WriteLine(travelBucketList.Find("Canberra, Australia.").Previous);
-        Console.WriteLine(travelBucketList.Find("Kyoto, Japan."));
+        Console.WriteLine(travelBucketList?.Find("Paris, France.")?.Value);
+        Console.WriteLine(travelBucketList?.FindLast("Roma, Italy.")?.ValueRef);
+        Console.WriteLine(travelBucketList?.Find("Paris, France.")?.Next);
+        Console.WriteLine(travelBucketList?.FindLast("Roma, Italy.")?.Previous?.Value);
+        Console.WriteLine(travelBucketList?.Find("Osaka, Japan.")?.Next?.Previous?.Value);
+        Console.WriteLine(travelBucketList?.Find("Canberra, Australia.")?.Previous);
+        Console.WriteLine(travelBucketList?.Find("Kyoto, Japan."));
         //Console.WriteLine(travelBucketList.Find("Tokyo, Japan.").Next.Value); // will return null as last item points to the next item that is null
 
         // Searching to see our list contains the specified item is computationally expensive as we have to traverse thoroughly through the entire linked list.
-        Console.WriteLine(travelBucketList.Contains("Osaka, Japan."));
-        Console.WriteLine(travelBucketList.Contains("Kyoto, Japan."));
-        Console.WriteLine(travelBucketList.Contains("Tokyo, Japan."));
+        Console.WriteLine(travelBucketList?.Contains("Osaka, Japan."));
+        Console.WriteLine(travelBucketList?.Contains("Kyoto, Japan."));
+        Console.WriteLine(travelBucketList?.Contains("Tokyo, Japan."));
 
         // removing items
-        travelBucketList.RemoveFirst();
-        travelBucketList.RemoveLast();
+        travelBucketList?.RemoveFirst();
+        travelBucketList?.RemoveLast();
 
         // Removes the first occurrence of the specified item in the linked list and returns true if deleted; otherwise, it returns false.
-        Console.WriteLine(travelBucketList.Remove("Kyoto, Japan."));
-        Console.WriteLine(travelBucketList.Remove("Osaka, Japan."));
+        Console.WriteLine(travelBucketList?.Remove("Kyoto, Japan."));
+        Console.WriteLine(travelBucketList?.Remove("Osaka, Japan."));
 
-        travelBucketList.Clear(); // Removes all nodes of type 'LinkedListNode' from linked list type 'LinkedList'.
+        travelBucketList?.Clear(); // Removes all nodes of type 'LinkedListNode' from linked list type 'LinkedList'.
 
         // It should be noted that in a C# linked list, we can only find and remove items by object, not by index.
     }

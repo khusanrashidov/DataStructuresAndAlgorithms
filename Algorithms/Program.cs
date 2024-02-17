@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 namespace Algorithms
@@ -9,7 +11,9 @@ namespace Algorithms
         {
             //Console.WriteLine("Hello World");
             //CommonAlgorithmsInProgramming.MainMethod();
-            LinkedList.MainFunction();
+            //LinkedList.MainFunction();
+            //Stack.Method();
+            //Queue.Function();
         }
     }
 
@@ -210,4 +214,86 @@ namespace Algorithms
             itemList?.DumpList();
         }
     }
+
+    class Stack
+    {
+        ArrayList stack = new ArrayList();
+        public void Push(object item)
+        {
+            stack.Add(item);
+        }
+        public object? Pop()
+        {
+            object? element = stack?[^1!];
+            stack?.RemoveAt(stack.Count! - 1!);
+            return element!;
+        }
+        public object? Peek()
+        {
+            return stack[^1!]!;
+        }
+        public static void Method()
+        {
+            Stack stack = new Stack();
+            stack.Push(8);
+            stack.Push(1);
+            stack.Push(5);
+            stack.Push(2);
+            Console.WriteLine(stack.Peek());
+            Console.WriteLine(stack.Pop());
+            Console.WriteLine(stack.Peek());
+            stack.Push(8);
+            Console.WriteLine(stack.Peek());
+            stack.Pop();
+            stack.Pop();
+            Console.WriteLine(stack.Peek());
+        }
+    }
+
+    // We can use a regular array list as a queue but it's very inefficient to do so and
+    // that's because removing items from the front of a list requires a big O of linear
+    // time complexity as all the subsequent items have to be shifted down in their
+    // slots when we do that.
+
+    class Queue
+    {
+        LinkedList list = new LinkedList();
+
+        List<object> queue = new List<object>();
+
+        public void Enqueue(object item)
+        {
+            queue.Add(item);
+        }
+
+        public object? Dequeue()
+        {
+            object? item = queue[0];
+            queue?.RemoveAt(0);
+            return item;
+        }
+
+        public object Peek()
+        {
+            return queue[0];
+        }
+
+        public static void Function()
+        {
+            Queue queue = new Queue();
+            queue.Enqueue(2);
+            queue.Enqueue(5);
+            queue.Enqueue(1);
+            queue.Enqueue(8);
+            Console.WriteLine(queue.Peek());
+            Console.WriteLine(queue.Dequeue());
+            Console.WriteLine(queue.Peek());
+            queue.Enqueue(8);
+            Console.WriteLine(queue.Peek());
+            queue.Dequeue();
+            queue.Dequeue();
+            Console.WriteLine(queue.Peek());
+        }
+    }
 }
+//Hashtable hash = new Hashtable();
