@@ -14,6 +14,7 @@ namespace Algorithms
             //LinkedList.MainFunction();
             //Stack.Method();
             //Queue.Function();
+            HashTable.Hash();
         }
     }
 
@@ -295,5 +296,56 @@ namespace Algorithms
             Console.WriteLine(queue.Peek());
         }
     }
+
+    class HashTable
+    {
+        // C# hashtables don't shrink; they only grow by doubling like in lists.
+        public static void Hash()
+        {
+            Hashtable hashMap = new Hashtable()
+            {
+                ["key1"] = 1,
+                ["key2"] = 2,
+                ["key3"] = "three",
+            };
+
+            Console.WriteLine(hashMap);
+
+            // Now we've printed out the contents. You can see that they're not stored
+            // in any particular order. In this case, they happen to be listed in
+            // reverse order that I added them in, but hash tables don't make any
+            // guarantees about that. There's no way of knowing what order a hash
+            // table is going to store the keys and the values in.
+
+            foreach (var element in hashMap)
+            {
+                Console.WriteLine(element);
+            }
+            Console.WriteLine();
+            // And it's also possible to build the hash table progressively since these
+            // data structures can grow or shrink to fit the data that they contain.
+
+            Hashtable hashTable = new Hashtable();
+            hashTable[(long)1] = (double)1;
+            hashTable.Add((long)5, (double)5);
+            hashTable[(long)8] = (double)8;
+            foreach (var item in hashTable)
+                Console.WriteLine(item);
+            Console.WriteLine();
+            hashTable.Remove((long)5);
+            foreach (var item in hashTable)
+                Console.WriteLine(item);
+            Console.WriteLine();
+
+            Hashtable hash = new Hashtable() { };
+            hash["key1"] = 1;
+            hash.Add("key2", 2);
+            hash["key3"] = "three";
+            foreach (object item in hash)
+                Console.WriteLine(item);
+        }
+
+        double[] dynamicArray = new double[] { }; // dynamic array
+        long[] staticArray = new long[8]; // static array
+    }
 }
-//Hashtable hash = new Hashtable();
