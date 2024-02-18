@@ -341,6 +341,11 @@ class HashClass
         {
             Console.WriteLine(item);
         }
+        Console.WriteLine();
+        foreach (KeyValuePair<object, string> item in statesToCapitals)
+        {
+            Console.WriteLine($"[{item.Key}" + ", " + $"{item.Value}]"); // or just `Console.WriteLine($"[{item.Key}, {item.Value}]");`
+        }
 
         // There is also a notion of FrozenDictionary. Frozen sets, dictionaries, collections provide an immutable, read-only set that is excellently optimized for fast lookup and enumeration. In frozen dictionaries we cannot add or remove items to the collection.
         FrozenDictionary<int, int> frozenDictionary = Enumerable.Range(0, 8).ToFrozenDictionary(key => key);

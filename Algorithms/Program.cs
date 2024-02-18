@@ -341,6 +341,13 @@ namespace Algorithms
             hash["key1"] = 1;
             hash.Add("key2", 2);
             hash["key3"] = "three";
+            hash.Remove("key3");
+            foreach (object item in hash)
+                Console.WriteLine(item);
+            Console.WriteLine(hash["key1"] is not null ? hash["key1"]?.ToString() : "null");
+            Console.WriteLine(hash["key8"] is null ? "null" : hash[key: "key8"]?.ToString());
+            hash["key2"] = 8;
+            hash["key8"] = "K8";
             foreach (object item in hash)
                 Console.WriteLine(item);
         }
