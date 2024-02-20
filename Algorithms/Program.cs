@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.CompilerServices;
 
 namespace Algorithms
@@ -354,5 +355,69 @@ namespace Algorithms
 
         double[] dynamicArray = new double[] { }; // dynamic array
         long[] staticArray = new long[8]; // static array
+    }
+
+    class Recursion
+    {
+        static public long FactorialNoRecursion(byte n) // long and hard readable code
+        {
+            if (n == 0)
+                return 1;
+            long value = 1;
+            for (int i = n; i > 0; i--)
+            {
+                value *= i;
+            }
+            return value;
+        }
+        public static long RecursiveFactorial(byte n) // short and clean readable code
+        {
+            if (n == 0) // The breaking point condition that limites the method from calling itself.
+                return 1;
+            return n * RecursiveFactorial((byte)(n - 1));
+        }
+
+        public long FibonacciNumbersNoRecursion(short n) // not recursive but high performance
+        {
+            if (n < 2)
+                return n;
+            long[] f = new long[n + 1];
+            f[0] = 0;
+            f[1] = 1;
+
+            for (int i = 2; i <= n; i++)
+            {
+                f[i] = f[i - 1] + f[i - 2];
+            }
+            return f[n];
+        }
+        public long FibonacciNumbersRecursive(int n) // recursive but very poor performance
+        {
+            if (n == 0 || n == 1) //satisfying condition
+                return n;
+            return FibonacciNumbersRecursive(n - 2) + FibonacciNumbersRecursive(n - 1);
+        }
+
+
+        private Dictionary<string, string> errors = new Dictionary<string, string>();
+        private List<string> result = new List<string>();
+        private void SearchForFiles(string path)
+        {
+            try
+            {
+                foreach (string fileName in Directory.GetFiles(path)) // gets all files in the current path
+                {
+                    result.Add(fileName);
+                }
+                foreach (string directory in Directory.GetDirectories(path)) // gets all folders in the current path
+                {
+                    SearchForFiles(directory); // Here the methods calls itself with a new parameter.
+                }
+            }
+            catch (System.Exception ex)
+            {
+                errors.Add(path, ex.Message);
+            }
+        }
     }
 }
