@@ -15,7 +15,10 @@ namespace Algorithms
             //LinkedList.MainFunction();
             //Stack.Method();
             //Queue.Function();
-            HashTable.Hash();
+            //HashTable.Hash();
+            //Recursion.CountDown((double)8);
+            //Recursion.CountDown(8);
+            Recursion.RecursiveMethodRecursionFunction();
         }
     }
 
@@ -359,6 +362,72 @@ namespace Algorithms
 
     class Recursion
     {
+        public static void RecursiveMethodRecursionFunction()
+        {
+            Console.WriteLine("The number {0} raised to the power {1} will be: {2}", 1, 8, Power(1, 8));
+            Console.WriteLine("The number {0} raised to the power {1} will be: {2}", 0, 0, Power(0, 0));
+            Console.WriteLine("The number {0} raised to the power {1} will be: {2}", 8, 0, Power(8, 0));
+            Console.WriteLine("The number {0} raised to the power {1} will be: {2}", 8, 2, Power(8, 2));
+            Console.WriteLine("{0}! equals: {1}", 0, Factorial(0));
+            Console.WriteLine("{0}! equals: {1}", 1, Factorial(1));
+            Console.WriteLine("{0}! equals: {1}", 5, Factorial(5));
+            Console.WriteLine("{0}! equals: {1}", 8, Factorial(8));
+            Console.WriteLine("{0}th term of the Fibonacci sequence series is: {1}", 0, Fibonacci(0));
+            Console.WriteLine("{0}th term of the Fibonacci sequence series is: {1}", 1, Fibonacci(1));
+            Console.WriteLine("{0}th term of the Fibonacci sequence series is: {1}", 2, Fibonacci(2));
+            Console.WriteLine("{0}th term of the Fibonacci sequence series is: {1}", 8, Fibonacci(8));
+        }
+        public static double Power(long num, long pwr)
+        {
+            if (pwr is 0)
+                return 1;
+            else
+                return num * Power(num, pwr - 1);
+        }
+        static public double Factorial(long k)
+        {
+            if (k is 0)
+                return 1;
+            else
+                return k * Factorial(k - 1);
+        }
+        public static double Fibonacci(long m)
+        {
+            if (m == 0 || m == 1)
+                return m;
+            else
+                return Fibonacci(m - 1) + Fibonacci(m - 2);
+        }
+
+        public static void CountDown(double m)
+        {
+            if (m == 0)
+            {
+                Console.WriteLine("Done!");
+                return;
+            }
+            else
+            {
+                Console.WriteLine(m);
+                CountDown(m - 1);
+            }
+        }
+
+        public static void CountDown(long m)
+        {
+            if (m == 0)
+            {
+                Console.WriteLine("Done!");
+                return; // the call stack is being unwound after the final return statement
+            }
+            else
+            {
+                Console.WriteLine(m);
+                CountDown(m - 1);
+                Console.WriteLine('k');
+            }
+        }
+
         static public long FactorialNoRecursion(byte n) // long and hard readable code
         {
             if (n == 0)
