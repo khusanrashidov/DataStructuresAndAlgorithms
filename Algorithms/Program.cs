@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -489,14 +490,117 @@ namespace Algorithms
             PrintArrayList(list);
             Console.WriteLine();
 
+            list = new List<long>() { 2, 7, 3, 8, 1, 5, 4, 6 };
             Console.WriteLine("Sorted with Bubble Sort:");
             BubbleSort(list);
             Console.WriteLine();
+
+            list = new List<long>() { 2, 7, 3, 8, 1, 5, 4, 6 };
+            Console.WriteLine("Sorted with Merge Sort:");
+            MergeSort(list);
+            Console.WriteLine();
+
+            list = new List<long>() { 2, 7, 3, 8, 1, 5, 4, 6 };
+            Console.WriteLine("Sorted with Quick Sort:");
+            QuickSort(list, 0, list.Count - 1);
+            Console.WriteLine();
         }
+        public static void QuickSort(List<long> list, int first, int last)
+        {
+            if (first < last)
+            {
+                // calculate the split point
+                int pivotIdx = Partition(list, first, last);
+
+                // sorting two partitions
+                QuickSort(list, first, pivotIdx - 1);
+                QuickSort(list, pivotIdx + 1, last);
+            }
+        }
+        static int Partition(List<long> list, int first, int last)
+        {
+            // choose by default first item as the pivot value
+            long pivotValue = list[first];
+
+            // establish the upper and lower indices
+            int lower = first + 1;
+            int upper = last;
+
+            // searching for the crossing point
+            bool cross = false;
+            while (!cross)
+            {
+                // to advance the lower index
+                while (lower <= upper && list[lower] <= pivotValue)
+                    lower++;
+                // to lower the upper index
+                while (list[upper] >= pivotValue && upper >= lower)
+                    upper--;
+                PrintArrayList(list);
+                // If two indexes cross, we found the split point.
+                if (upper < lower)
+                    cross = true;
+                else
+                {
+                    (list[upper], list[lower]) = (list[lower], list[upper]);
+                }
+            }
+
+            // When the split point is found, we exchange the pivot value.
+            (list[upper], list[first]) = (list[first], list[upper]);
+            
+            return upper;
+        }
+
         public static void MergeSort(List<long> list)
         {
+            int m;
+            if (list.Count > 1)
+            {
+                m = list.Count / 2;
+                List<long> left = list[..m];
+                List<long> right = list[m..];
+                MergeSort(left);
+                MergeSort(right);
 
+                int l = 0; // left list index
+                int r = 0; // right list index
+                int k = 0; // merge list index
+
+                // while there is content in both lists
+                while (l < left.Count && r < right.Count)
+                {
+                    if (left[l] < right[r])
+                    {
+                        list[k] = left[l];
+                        l++;
+                    }
+                    else
+                    {
+                        list[k] = right[r];
+                        r++;
+                    }
+                    k++;
+                }
+
+                // if the left list still has values
+                while (l < left.Count)
+                {
+                    list[k] = left[l];
+                    l++;
+                    k++;
+                }
+                // if the right list still has values
+                while (r < right.Count)
+                {
+                    list[k] = right[r];
+                    r++;
+                    k++;
+                }
+                PrintArrayList(list);
+            }
         }
+
         public static void BubbleSort(List<long> list)
         {
             bool swap;
@@ -521,6 +625,7 @@ namespace Algorithms
                 PrintArrayList(list);
             }
         }
+
         public static void PrintArrayList(List<long> list)
         {
             foreach (var item in list)

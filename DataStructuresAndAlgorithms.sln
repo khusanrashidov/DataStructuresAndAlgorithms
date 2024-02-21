@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataStructures", "DataStructures\DataStructures.csproj", "{2E97C430-1E61-4301-8399-3E4F3F633B9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithms", "Algorithms\Algorithms.csproj", "{0B67A413-B92B-45D4-8D83-D2FC099C797E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Algorithms", "Algorithms\Algorithms.csproj", "{0B67A413-B92B-45D4-8D83-D2FC099C797E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
