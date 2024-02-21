@@ -18,7 +18,8 @@ namespace Algorithms
             //HashTable.Hash();
             //Recursion.CountDown((double)8);
             //Recursion.CountDown(8);
-            Recursion.RecursiveMethodRecursionFunction();
+            //Recursion.RecursiveMethodRecursionFunction();
+            Sort.SortMethods();
         }
     }
 
@@ -481,6 +482,52 @@ namespace Algorithms
 
     class Sort
     {
+        public static void SortMethods()
+        {
+            List<long> list = new List<long>() { 2, 7, 3, 8, 1, 5, 4, 6 };
+            Console.WriteLine("Unsorted list:");
+            PrintArrayList(list);
+            Console.WriteLine();
 
+            Console.WriteLine("Sorted with Bubble Sort:");
+            BubbleSort(list);
+            Console.WriteLine();
+        }
+        public static void MergeSort(List<long> list)
+        {
+
+        }
+        public static void BubbleSort(List<long> list)
+        {
+            bool swap;
+            for (int k = 0; k < list.Count - 1; k++)
+            {
+                swap = false;
+                for (int m = 0; m < list.Count - k - 1; m++)
+                {
+                    if (list[m] > list[m + 1])
+                    {
+                        long temp = list[m];
+                        list[m] = list[m + 1];
+                        list[m + 1] = temp;
+                        swap = true;
+                    }
+                }
+                // If no swap was made in the inner loop, then the list is already sorted.
+                if (!swap)
+                {
+                    break;
+                }
+                PrintArrayList(list);
+            }
+        }
+        public static void PrintArrayList(List<long> list)
+        {
+            foreach (var item in list)
+            {
+                Console.Write(item + " ");
+            }
+            Console.WriteLine();
+        }
     }
 }
