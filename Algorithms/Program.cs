@@ -107,7 +107,6 @@ namespace Algorithms
                 }
                 return null;
             }
-
             public Node? DeleteAt(long index)
             {
                 if (index > count - 1)
@@ -139,7 +138,6 @@ namespace Algorithms
                     tempNode = tempNode.GetNext();
                 }
             }
-
             public Node? DeleteFirstOccurredNodeWithValueWithoutKeyIndex(double data)
             {
                 if (Find(data) == this.head)
@@ -259,7 +257,6 @@ namespace Algorithms
     // that's because removing items from the front of a list requires a big O of linear
     // time complexity as all the subsequent items have to be shifted down in their
     // slots when we do that.
-
     class Queue
     {
         LinkedList list = new LinkedList();
@@ -270,19 +267,16 @@ namespace Algorithms
         {
             queue.Add(item);
         }
-
         public object? Dequeue()
         {
             object? item = queue[0];
             queue?.RemoveAt(0);
             return item;
         }
-
         public object Peek()
         {
             return queue[0];
         }
-
         public static void Function()
         {
             Queue queue = new Queue();
@@ -320,7 +314,6 @@ namespace Algorithms
             // reverse order that I added them in, but hash tables don't make any
             // guarantees about that. There's no way of knowing what order a hash
             // table is going to store the keys and the values in.
-
             foreach (var element in hashMap)
             {
                 Console.WriteLine(element);
@@ -398,7 +391,6 @@ namespace Algorithms
             else
                 return Fibonacci(m - 1) + Fibonacci(m - 2);
         }
-
         public static void CountDown(double m)
         {
             if (m == 0)
@@ -412,7 +404,6 @@ namespace Algorithms
                 CountDown(m - 1);
             }
         }
-
         public static void CountDown(long m)
         {
             if (m == 0)
@@ -427,7 +418,6 @@ namespace Algorithms
                 Console.WriteLine('k');
             }
         }
-
         static public long FactorialNoRecursion(byte n) // long and hard readable code
         {
             if (n == 0)
@@ -467,7 +457,6 @@ namespace Algorithms
             return FibonacciNumbersRecursive(n - 2) + FibonacciNumbersRecursive(n - 1);
         }
 
-
         private Dictionary<string, string> errors = new Dictionary<string, string>();
         private List<string> result = new List<string>();
         private void SearchForFiles(string path)
@@ -488,5 +477,10 @@ namespace Algorithms
                 errors.Add(path, ex.Message);
             }
         }
+    }
+
+    class Sort
+    {
+
     }
 }
