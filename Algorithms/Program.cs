@@ -502,10 +502,95 @@ namespace Algorithms
 
             list = new List<long>() { 2, 7, 3, 8, 1, 5, 4, 6 };
             Console.WriteLine("Sorted with Quick Sort:");
-            QuickSort(list, 0, list.Count - 1);
+            QuickSort(list);
+            Console.WriteLine();
+
+            list = new List<long>() { 2, 7, 3, 8, 1, 5, 4, 6 };
+            Console.WriteLine("Sorted with Heap Sort:");
+            HeapSort(list);
+            Console.WriteLine();
+
+            list = new List<long>() { 2, 7, 3, 8, 1, 5, 4, 6 };
+            Console.WriteLine("Sorted with Selection Sort:");
+            SelectionSort(list);
             Console.WriteLine();
         }
-        public static void QuickSort(List<long> list, int first, int last)
+
+        public static void SelectionSort(List<long> list)
+        {
+            int n = list.Count;
+
+            // one by one move the boundary of the unsorted subarray
+            for (int i = 0; i < n - 1; i++)
+            {
+                // find the minimum element in the unsorted part of the array
+                int minIndex = i;
+                for (int j = i + 1; j < n; j++)
+                    if (list[j] < list[minIndex])
+                        minIndex = j;
+
+                // swap the minimum element with the leftmost element of the unsorted part
+                (list[i], list[minIndex]) = (list[minIndex], list[i]);
+
+                PrintArrayList(list);
+            }
+        }
+
+        public static void HeapSort(List<long> list)
+        {
+            int n = list.Count;
+
+            // building max heap
+            for (int i = n / 2 - 1; i >= 0; i--)
+            {
+                Heapify(list, n, i);
+            }
+
+            // extracting elements from the max heap
+            for (int i = n - 1; i >= 0; i--)
+            {
+                // Move current root (maximum element) to the end.
+                (list[i], list[0]) = (list[0], list[i]);
+                // Heapify the reduced heap.
+                Heapify(list, i, 0);
+            }
+        }
+        static void Heapify(List<long> list, int n, int rootIndex)
+        {
+            int largest = rootIndex; // initialize the largest as a root
+            int left = 2 * rootIndex + 1; // a left child
+            int right = 2 * rootIndex + 2; // a right child
+
+            // if the left child is larger than the root
+            if (left < n && list[left] > list[largest])
+            {
+                largest = left;
+            }
+
+            // if the right child is larger than the largest so far
+            if (right < n && list[right] > list[largest])
+            {
+                largest = right;
+            }
+
+            // if the largest is not the root
+            if (largest != rootIndex)
+            {
+                PrintArrayList(list);
+
+                // swap the root with the largest element
+                (list[largest], list[rootIndex]) = (list[rootIndex], list[largest]);
+
+                // recursively heapify the affected sub-tree
+                Heapify(list, n, largest);
+            }
+        }
+
+        public static void QuickSort(List<long> list)
+        {
+            QuickSortRecursive(list, 0, list.Count - 1);
+        }
+        static void QuickSortRecursive(List<long> list, int first, int last)
         {
             if (first < last)
             {
@@ -513,8 +598,8 @@ namespace Algorithms
                 int pivotIdx = Partition(list, first, last);
 
                 // sorting two partitions
-                QuickSort(list, first, pivotIdx - 1);
-                QuickSort(list, pivotIdx + 1, last);
+                QuickSortRecursive(list, first, pivotIdx - 1);
+                QuickSortRecursive(list, pivotIdx + 1, last);
             }
         }
         static int Partition(List<long> list, int first, int last)
@@ -548,7 +633,7 @@ namespace Algorithms
 
             // When the split point is found, we exchange the pivot value.
             (list[upper], list[first]) = (list[first], list[upper]);
-            
+
             return upper;
         }
 
