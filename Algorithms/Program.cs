@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace Algorithms
 {
@@ -22,7 +19,8 @@ namespace Algorithms
             //Recursion.CountDown((double)8);
             //Recursion.CountDown(8);
             //Recursion.RecursiveMethodRecursionFunction();
-            Sort.SortMethods();
+            //Sort.SortFunctions();
+            Search.SearchMethods();
         }
     }
 
@@ -485,7 +483,7 @@ namespace Algorithms
 
     class Sort
     {
-        public static void SortMethods()
+        public static void SortFunctions()
         {
             List<long> list = new List<long>() { 2, 7, 3, 8, 1, 5, 4, 6 };
             Console.WriteLine("Unsorted list:");
@@ -934,6 +932,66 @@ namespace Algorithms
             foreach (var item in list)
                 Console.Write(item + " ");
             Console.WriteLine();
+        }
+    }
+
+    class Search
+    {
+        public static void SearchMethods()
+        {
+            ArrayList array = new ArrayList() { 2.0, 7.0, 3.0, 8.0, 1.0, 5.0, 4.0, 6.0 };
+            Console.WriteLine("Sequential Search:");
+            Console.WriteLine(SequentialSearch(array, 8) is not null ? SequentialSearch(array, 8) : "null");
+            Console.WriteLine(SequentialSearch(array, 0) is not null ? SequentialSearch(array, 0) : "null");
+            Console.WriteLine();
+
+            Console.WriteLine("Binary Search:");
+            ArrayList list = new ArrayList() { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0 };
+            Console.WriteLine(BinarySearch(list, 6) is not null ? BinarySearch(list, 6) : "null");
+            Console.WriteLine(BinarySearch(list, 0) is not null ? BinarySearch(list, 0) : "null");
+
+            Console.WriteLine("Is the array list sorted:");
+            Console.WriteLine(IsSorted(array) ? "Sorted: " + true : "Sorted: " + false);
+            Console.WriteLine(IsSorted(list) ? "Sorted: " + true : "Sorted: " + false);
+
+            Console.WriteLine(array.ToArray().Zip(array.ToArray().Skip(1), (current, next) => (double)current! <= (double)next!).All(x => x));
+            Console.WriteLine(list.ToArray().Zip(list.ToArray().Skip(1), (current, next) => (double)current! <= (double)next!).All(x => x));
+        }
+
+        public static bool IsSorted(ArrayList array)
+        {
+            for (int i = 0; i < array.Count - 1; i++)
+                if ((double)array[i]! > (double)array[i + 1]!)
+                    return false;
+            return true;
+        }
+
+        public static long? BinarySearch(ArrayList list, double elementItem)
+        {
+            int lowerIdx = 0;
+            int upperIdx = list.Count - 1;
+
+            while (lowerIdx <= upperIdx)
+            {
+                int midPoint = lowerIdx + (upperIdx - lowerIdx) / 2;
+
+                if ((double)list[midPoint]! == elementItem)
+                    return midPoint;
+                else if (elementItem > (double)list[midPoint]!)
+                    lowerIdx = midPoint + 1;
+                else
+                    upperIdx = midPoint - 1;
+            }
+
+            return null;
+        }
+
+        public static double? SequentialSearch(ArrayList array, double itemElement)
+        {
+            for (long k = 0; k < array.Count; k++)
+                if (itemElement == (double)array[(int)k]!)
+                    return k;
+            return null;
         }
     }
 }
