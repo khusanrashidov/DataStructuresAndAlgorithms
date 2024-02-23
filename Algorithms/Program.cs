@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace Algorithms
@@ -514,6 +516,235 @@ namespace Algorithms
             Console.WriteLine("Sorted with Selection Sort:");
             SelectionSort(list);
             Console.WriteLine();
+
+            list = new List<long>() { 2, 7, 3, 8, 1, 5, 4, 6 };
+            Console.WriteLine("Sorted with Insertion Sort:");
+            InsertionSort(list);
+            Console.WriteLine();
+
+            list = new List<long>() { 2, 7, 3, 8, 1, 5, 4, 6 };
+            Console.WriteLine("Sorted with Shell Sort:");
+            ShellSort(list);
+            Console.WriteLine();
+
+            list = new List<long>() { 2, 7, 3, 8, 1, 5, 4, 6 };
+            Console.WriteLine("Sorted with Count Sort:");
+            CountSort(list);
+            Console.WriteLine();
+
+            list = new List<long>() { 2, 7, 3, 8, 1, 5, 4, 6 };
+            Console.WriteLine("Sorted with Radix Sort:");
+            RadixSort(list);
+            Console.WriteLine();
+
+            list = new List<long>() { 2, 7, 3, 8, 1, 5, 4, 6 };
+            Console.WriteLine("Sorted with Bucket Sort:");
+            BucketSort(list);
+            Console.WriteLine();
+
+            list = new List<long>() { 2, 7, 3, 8, 1, 5, 4, 6 };
+            Console.WriteLine("Sorted with Comb Sort:");
+            CombSort(list);
+            Console.WriteLine();
+        }
+
+        public static void CombSort(List<long> list)
+        {
+            int n = list.Count;
+            int gap = n;
+            double shrinkFactor = 1.3;
+            bool swap = true;
+
+            while (gap > 1 || swap)
+            {
+                // Update the gap size.
+                gap = (int)(gap / shrinkFactor);
+                if (gap < 1)
+                {
+                    gap = 1;
+                }
+
+                swap = false;
+
+                // Compare and swap elements with a fixed gap.
+                for (int i = 0; i + gap < n; i++)
+                    if (list[i] > list[i + gap])
+                    {
+                        (list[i + gap], list[i]) = (list[i], list[i + gap]);
+                        swap = true;
+                        PrintArrayList(list);
+                    }
+            }
+        }
+
+        public static void BucketSort(List<long> list)
+        {
+            int n = list.Count;
+
+            // Determine maximum and minimum values.
+            long minValue = list.Min();
+            long maxValue = list.Max();
+
+            // Number of buckets.
+            int bucketCount = (int)(maxValue - minValue) + 1;
+
+            // Create buckets list.
+            List<long>[] buckets = new List<long>[bucketCount];
+            for (int i = 0; i < bucketCount; i++)
+                buckets[i] = new List<long>();
+
+            // Distribute elements into the buckets.
+            for (int i = 0; i < n; i++)
+            {
+                int bucketIndex = (int)(list[i] - minValue);
+                buckets[bucketIndex].Add(list[i]);
+            }
+
+            // Sort each bucket using insertion sort.
+            for (int i = 0; i < bucketCount; i++)
+            {
+                buckets[i].Sort();
+                PrintArrayList(buckets[i]);
+            }
+
+            // Concatenate the sorted buckets.
+            int index = 0;
+            for (int i = 0; i < bucketCount; i++)
+                for (int j = 0; j < buckets[i].Count; j++)
+                    list[index++] = buckets[i][j];
+
+            PrintArrayList(list);
+        }
+
+        public static void RadixSort(List<long> list)
+        {
+            long max = list.Max();
+
+            // Perform LSD radix sort.
+            for (int exp = 1; max / exp > 0; exp *= 10)
+                CountingSort(list, exp);
+        }
+        static void CountingSort(List<long> list, int exp)
+        {
+            int n = list.Count;
+            List<long> sorted = new List<long>(); // an empty list
+            sorted = new List<long>(new long[n]);
+            int[] count = new int[10];
+
+            // Count the occurrences of each digit.
+            for (int i = 0; i < n; i++)
+            {
+                long digit = (list[i] / exp) % 10;
+                count[digit]++;
+            }
+
+            // Calculate the cumulative count.
+            for (int i = 1; i < 10; i++)
+                count[i] += count[i - 1];
+
+            // Build the sorted array.
+            for (int i = n - 1; i >= 0; i--)
+            {
+                long digit = (list[i] / exp) % 10;
+                sorted[count[digit] - 1] = list[i];
+                count[digit]--;
+                PrintArrayList(sorted);
+            }
+
+            // Copy the output array to the original list.
+            for (int i = 0; i < n; i++)
+                list[i] = sorted[i];
+        }
+
+        public static void CountSort(List<long> list)
+        {
+            int n = list.Count;
+            long maxValue = default;
+            long minValue = default;
+
+            // Find the maximum and minimum values in the list.
+            foreach (var num in list)
+            {
+                if (num > maxValue)
+                    maxValue = num;
+                if (num < minValue)
+                    minValue = num;
+            }
+
+            // Initializing count list with zeros.
+            List<long> countList = new List<long>(new long[maxValue - minValue + 1]);
+
+            // Mapping each element of the list as an index of count list array.
+            foreach (var num in list)
+                countList[(int)(num - minValue)]++;
+
+            // Calculating the prefix sum at every index of the count list.
+            for (int j = 1; j < countList.Count; j++)
+                countList[j] += countList[j - 1];
+
+            // Creating a sorted list from the count list.
+            List<long> sorted = new List<long>(new long[n]);
+            for (int k = n - 1; k >= 0; k--)
+            {
+                sorted[(int)(countList[(int)(list[k] - minValue)] - 1)] = list[k];
+                countList[(int)(list[k] - minValue)]--;
+                PrintArrayList(sorted);
+            }
+
+            // Copying items from the sorted list to the actual lists.
+            for (int k = 0; k < sorted.Count; k++)
+                list[k] = sorted[k];
+        }
+
+        public static void ShellSort(List<long> list)
+        {
+            int n = list.Count;
+            int gap = 1;
+
+            // Choose the gap sequence (e.g., Knuth sequence).
+            while (gap < n / 3)
+                gap = 3 * gap + 1;
+
+            while (gap >= 1)
+            {
+                for (int i = gap; i < n; i++)
+                {
+                    long temp = list[i];
+                    int j = i;
+
+                    // Shift elements that are far apart by the gap distance.
+                    while (j >= gap && list[j - gap] > temp)
+                    {
+                        list[j] = list[j - gap];
+                        j -= gap;
+                    }
+                    PrintArrayList(list);
+                    list[j] = temp;
+                }
+                gap /= 3;
+            }
+        }
+
+        public static void InsertionSort(List<long> list)
+        {
+            int n = list.Count;
+
+            for (int i = 1; i < n; i++)
+            {
+                long key = list[i];
+                int j = i - 1;
+
+                // Move elements of arr[0..i-1] that are greater than they key to one position ahead of their current position.
+                while (j >= 0 && list[j] > key)
+                {
+                    list[j + 1] = list[j];
+                    j--;
+                }
+
+                list[j + 1] = key;
+
+                PrintArrayList(list);
+            }
         }
 
         public static void SelectionSort(List<long> list)
@@ -542,9 +773,7 @@ namespace Algorithms
 
             // building max heap
             for (int i = n / 2 - 1; i >= 0; i--)
-            {
                 Heapify(list, n, i);
-            }
 
             // extracting elements from the max heap
             for (int i = n - 1; i >= 0; i--)
@@ -563,15 +792,11 @@ namespace Algorithms
 
             // if the left child is larger than the root
             if (left < n && list[left] > list[largest])
-            {
                 largest = left;
-            }
 
             // if the right child is larger than the largest so far
             if (right < n && list[right] > list[largest])
-            {
                 largest = right;
-            }
 
             // if the largest is not the root
             if (largest != rootIndex)
@@ -626,9 +851,7 @@ namespace Algorithms
                 if (upper < lower)
                     cross = true;
                 else
-                {
                     (list[upper], list[lower]) = (list[lower], list[upper]);
-                }
             }
 
             // When the split point is found, we exchange the pivot value.
@@ -693,30 +916,23 @@ namespace Algorithms
             {
                 swap = false;
                 for (int m = 0; m < list.Count - k - 1; m++)
-                {
                     if (list[m] > list[m + 1])
                     {
-                        long temp = list[m];
-                        list[m] = list[m + 1];
-                        list[m + 1] = temp;
+                        (list[m + 1], list[m]) = (list[m], list[m + 1]);
                         swap = true;
                     }
-                }
+
                 // If no swap was made in the inner loop, then the list is already sorted.
                 if (!swap)
-                {
                     break;
-                }
                 PrintArrayList(list);
             }
         }
 
-        public static void PrintArrayList(List<long> list)
+        static void PrintArrayList(List<long> list)
         {
             foreach (var item in list)
-            {
                 Console.Write(item + " ");
-            }
             Console.WriteLine();
         }
     }
