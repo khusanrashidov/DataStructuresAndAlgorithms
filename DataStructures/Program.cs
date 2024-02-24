@@ -29,8 +29,8 @@ class ArrayClass
 {
     public static void Arrays()
     {
-        double[] arrayInitializer = { 0, 1, 2, 0, 1, 2, 0, 2, 8 };
-        long[] listInitializer = [0, 1, 2, 0, 1, 2, 0, 2, 8];
+        double[] arrayInitializer = { 8 };
+        long[] listInitializer = [8];
 
         long[] perStudentPetCount = [0, 1, 2, 0, 1, 2, 0, 2, 8];
         long numOfStudents = perStudentPetCount.Length;
