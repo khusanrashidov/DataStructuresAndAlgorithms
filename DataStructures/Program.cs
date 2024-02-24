@@ -29,7 +29,10 @@ class ArrayClass
 {
     public static void Arrays()
     {
-        long[] perStudentPetCount = [0, 1, 2, 0, 1, 2, 0, 2, 8]; // or long[] perStudentPetCount = { 0, 1, 2, 0, 1, 2, 0, 2, 8 };
+        double[] arrayInitializer = { 0, 1, 2, 0, 1, 2, 0, 2, 8 };
+        long[] listInitializer = [0, 1, 2, 0, 1, 2, 0, 2, 8];
+
+        long[] perStudentPetCount = [0, 1, 2, 0, 1, 2, 0, 2, 8];
         long numOfStudents = perStudentPetCount.Length;
 
         //Console.WriteLine(perStudentPetCount[9]); // index out of range exception
@@ -349,6 +352,8 @@ class HashClass
 
         // There is also a notion of FrozenDictionary. Frozen sets, dictionaries, collections provide an immutable, read-only set that is excellently optimized for fast lookup and enumeration. In frozen dictionaries we cannot add or remove items to the collection.
         FrozenDictionary<int, int> frozenDictionary = Enumerable.Range(0, 8).ToFrozenDictionary(key => key);
+        // Represents a collection of key/value pairs that are sorted on the key.
+        SortedDictionary<double, long> sortedDictionary = new SortedDictionary<double, long>() { };
     }
 }
 
@@ -359,7 +364,7 @@ class SetClass
     // HashSet: A HashSet does not store the elements in order while giving faster operation time.
     HashSet<long> hashSet = new HashSet<long>();
     // SortedSet: A SortedSet stores the elements in order which allows more functionality.
-    SortedSet<double> sortedSet = new SortedSet<double>();
+    SortedSet<double> sortedSet = new SortedSet<double>() { };
     // FrozentSet: A FrozenSet as a FrozenDictionary provides an immutable, read-only dictionaryand set, optimized for fast lookup and enumeration.
     FrozenSet<int> frozenSet = Enumerable.Range(0, 8).ToFrozenSet();
 

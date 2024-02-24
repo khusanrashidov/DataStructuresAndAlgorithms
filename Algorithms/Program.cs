@@ -10,17 +10,20 @@ namespace Algorithms
     {
         static void Main(string[] args)
         {
-            //Console.WriteLine("Hello World");
-            //CommonAlgorithmsInProgramming.MainMethod();
-            //LinkedList.MainFunction();
-            //Stack.Method();
-            //Queue.Function();
-            //HashTable.Hash();
-            //Recursion.CountDown((double)8);
-            //Recursion.CountDown(8);
-            //Recursion.RecursiveMethodRecursionFunction();
-            //Sort.SortFunctions();
+            Console.WriteLine("Hello World");
+            CommonAlgorithmsInProgramming.MainMethod();
+            LinkedList.MainFunction();
+            Stack.Method();
+            Queue.Function();
+            HashTable.Hash();
+            Recursion.CountDown((double)8);
+            Recursion.CountDown(8);
+            Recursion.RecursiveMethodRecursionFunction();
+            Sort.SortFunctions();
             Search.SearchMethods();
+            Algo.UniqueFilteringWithHashTable();
+            Algo.ValueCountingWithHashTable();
+            Algo.FindMaxValueRecursively();
         }
     }
 
@@ -993,5 +996,88 @@ namespace Algorithms
                     return k;
             return null;
         }
+    }
+
+    class Algo
+    {
+        public static void FindMaxValueRecursively() // global function
+        {
+            List<double> array = new List<double>() { 2, 7, 3, 8, 1, 5, 4, 6 };
+
+            Console.WriteLine(FindMax(array));
+
+            double FindMax(List<double> array)
+            {
+                Range range = 1..;
+                Index index = 0;
+
+                if (array.Count == 1)
+                    return array[index];
+
+                double op1 = array[index];
+                double op2 = FindMax(array[range]);
+
+                if (op1 > op2)
+                    return op1;
+                else
+                    return op2;
+            }
+        }
+
+        public static void UniqueFilteringWithHashTable()
+        {
+            ArrayList array = ["carrot", "cabbage", "onion", "tomato", "potato", "apple", "pineapple", "carrot", "apple", "onion", "cabbage", "pumpkin", "cucumber"];
+            foreach (object element in array)
+                Console.WriteLine(element);
+            Console.WriteLine();
+
+            Hashtable table = new Hashtable();
+            foreach (string element in array)
+                table[element] = 0;
+
+            HashSet<string> set = new HashSet<string>(table.Keys.Cast<string>());
+            foreach (string key in set)
+                Console.WriteLine(key);
+
+            Console.WriteLine();
+
+            List<string> list = ["carrot", "cabbage", "onion", "tomato", "potato", "apple", "pineapple", "carrot", "apple", "onion", "cabbage", "pumpkin", "cucumber"];
+            foreach (var item in list)
+                Console.WriteLine(item);
+            Console.WriteLine();
+
+            Dictionary<string, sbyte> dictionary = new Dictionary<string, sbyte>();
+            foreach (string item in list)
+                dictionary[item] = 0;
+
+            HashSet<string> hash = new HashSet<string>(dictionary.Keys);
+            foreach (string value in hash)
+                Console.WriteLine(value);
+        }
+        public static void ValueCountingWithHashTable()
+        {
+            List<string> list = ["carrot", "cabbage", "onion", "tomato", "potato", "apple", "pineapple", "carrot", "apple", "onion", "cabbage", "pumpkin", "cucumber"];
+            foreach (var item in list)
+                Console.WriteLine(item);
+            Console.WriteLine();
+
+            Hashtable hashTable = new Hashtable();
+
+            foreach (var item in list)
+            {
+                if (hashTable.ContainsKey(item))
+                    hashTable[item] = (long)hashTable[item]! + 1;
+                else
+                    hashTable[item] = (long)1;
+            }
+
+            foreach (DictionaryEntry item in hashTable) // The DictionaryEntry type is a non-generic type of KeyValuePair.
+            {
+                Console.WriteLine($"[{item.Key}, {item.Value}]");
+            }
+
+            SortedList<double, long> GenericSortedList = new SortedList<double, long>() { }; // local variable
+        }
+        SortedList SortedList = new SortedList() { }; // global variable
     }
 }
