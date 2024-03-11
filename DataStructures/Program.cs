@@ -199,6 +199,8 @@ class StackClass
     // It is the same as Array except that its size increases dynamically.
     // An ArrayList can be used to add unknown data where you don't know the types and the size of the data.
 
+    BitArray bitArray = new BitArray(8); // Manages a compact array of bit values, which are represented as Booleans, where true indicates that the bit is `on` '1' and false indicates that the bit is `off` '0'.
+
     Array array = Array.CreateInstance(typeof(object), sizeof(double)); // Array.BinarySearch(array, 8) // static
 
     ArrayList arrayList = new ArrayList(); // arrayList.BinarySearch(8); // non-static
