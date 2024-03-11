@@ -199,6 +199,11 @@ class StackClass
     // It is the same as Array except that its size increases dynamically.
     // An ArrayList can be used to add unknown data where you don't know the types and the size of the data.
 
+    // It's possible to use indexes in C# ArrayList. However, you can't use the indexing syntax ([]) directly as you would with arrays. Instead, you need to use the ArrayList's Get and Set methods to access elements at specific indexes.
+    // Elements are added to the ArrayList using the Add method.
+    // Elements are accessed using the [] syntax, but this is done through the getter and setter methods internally.
+    // You can modify elements at specific indexes using the [] syntax as well.
+
     BitArray bitArray = new BitArray(8); // Manages a compact array of bit values, which are represented as Booleans, where true indicates that the bit is `on` '1' and false indicates that the bit is `off` '0'.
 
     Array array = Array.CreateInstance(typeof(object), sizeof(double)); // Array.BinarySearch(array, 8) // static
